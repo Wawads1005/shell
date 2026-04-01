@@ -1,4 +1,4 @@
-# shell
+# Shell
 
 A small Unix-like shell written in C.
 
