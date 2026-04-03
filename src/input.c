@@ -14,20 +14,25 @@ String readline() {
   while (true) {
     ascii_character = getchar();
 
-    switch (ascii_character) {
-      case NL:
-      case EOF:
-        line[position] = '\0';
+    if (ascii_character == EOF) {
+      if (position == 0) {
+        free(line);
+        return NULL;
+      }
 
-        return line;
-      default:
-        line[position] = (char)ascii_character;
-
-        position++;
-        break;
+      line[position] = '\0';
+      return line;
     }
 
-    if (position >= (line_size - 1)) {
+    if (ascii_character == NL) {
+      line[position] = '\0';
+      return line;
+    }
+
+    line[position] = (char)ascii_character;
+    position++;
+
+    if (position >= line_size - 1) {
       line_size += BUFSIZ;
       String resized_line = realloc(line, sizeof(char) * line_size);
 

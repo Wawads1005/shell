@@ -13,20 +13,31 @@ int main(void) {
   while (true) {
     String current_working_directory = get_current_working_directory();
 
+    if (current_working_directory == NULL) {
+      fprintf(stderr, "failed to get current working directory\n");
+      break;
+    }
+
     printf("%s> ", current_working_directory);
+    free(current_working_directory);
 
     String line = readline();
+
+    if (line == NULL) {
+      printf("\n");
+      break;
+    }
+
     String* arguments = parse_arguments(line);
 
     int response = execute(arguments);
 
+    free(line);
+    free(arguments);
+
     if (response == -1) {
       break;
     }
-
-    free(current_working_directory);
-    free(line);
-    free(arguments);
   }
 
   return 0;
