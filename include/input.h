@@ -1,11 +1,14 @@
 #ifndef INPUT_H
 #define INPUT_H
 
+#include <stdbool.h>
 #include <stdio.h>
-#include <string.h>
+#include <stdlib.h>
 
 #include "common.h"
 
-String readline(Buffer buffer);
+#define NL 10
+
+String readline();
 
 #endif

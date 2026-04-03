@@ -15,13 +15,7 @@ int main(void) {
 
     printf("%s> ", current_working_directory);
 
-    Buffer line_buffer = "\0";
-    String line = readline(line_buffer);
-
-    if (line == NULL) {
-      break;
-    }
-
+    String line = readline();
     String* arguments = parse_arguments(line);
 
     if (strcmp(arguments[0], "exit") == 0) {
@@ -53,6 +47,7 @@ int main(void) {
     waitpid(child_process_id, &child_status, 0);
 
     free(current_working_directory);
+    free(line);
     free(arguments);
   }
 
