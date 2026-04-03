@@ -11,9 +11,7 @@
 
 int main(void) {
   while (true) {
-    Buffer current_working_directory_buffer = "\0";
-    String current_working_directory =
-        get_current_working_directory(current_working_directory_buffer);
+    String current_working_directory = get_current_working_directory();
 
     printf("%s> ", current_working_directory);
 
@@ -54,6 +52,7 @@ int main(void) {
 
     waitpid(child_process_id, &child_status, 0);
 
+    free(current_working_directory);
     free(arguments);
   }
 
