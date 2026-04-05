@@ -9,5 +9,6 @@
   } Name##Vector;
 
 DEFINE_VECTOR(char, String)
+DEFINE_VECTOR(char*, Arguments)
 
 #endif

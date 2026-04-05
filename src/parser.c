@@ -1,6 +1,6 @@
 #include "parser.h"
 
-ArgumentsVector* parse_arguments(char* line_data) {
+ArgumentsVector* parse_arguments(StringVector* line) {
   ArgumentsVector* arguments = malloc(sizeof(ArgumentsVector));
 
   if (arguments == NULL) {
@@ -16,7 +16,7 @@ ArgumentsVector* parse_arguments(char* line_data) {
     exit(EXIT_FAILURE);
   }
 
-  char* argument = strtok(line_data, " ");
+  char* argument = strtok(line->data, " ");
 
   while (argument != NULL) {
     if (arguments->length >= arguments->capacity - 1) {

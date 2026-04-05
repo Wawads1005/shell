@@ -28,12 +28,13 @@ int main(void) {
       break;
     }
 
-    ArgumentsVector* arguments = parse_arguments(line->data);
+    ArgumentsVector* arguments = parse_arguments(line);
 
-    int response = execute(arguments->data);
+    int response = execute(arguments);
 
     free(line->data);
     free(line);
+    free(arguments->data);
     free(arguments);
 
     if (response == -1) {

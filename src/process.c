@@ -17,14 +17,14 @@ BuiltInCommand built_in_commands[2] = {
   { .name = "exit", .execute = execute_exit }
 };
 
-int execute_change_directory(char** arguments) {
-  if (arguments[1] == NULL) {
+int execute_change_directory(ArgumentsVector* arguments) {
+  if (arguments->length <= 1) {
     fprintf(stderr, "cd: missing arguments\n");
 
     return 0;
   }
 
-  int response = chdir(arguments[1]);
+  int response = chdir(arguments->data[1]);
   if (response == -1) {
     perror("cd");
     return 0;
@@ -33,15 +33,15 @@ int execute_change_directory(char** arguments) {
   return 1;
 }
 
-int execute_exit(char** arguments) {
+int execute_exit(ArgumentsVector* arguments) {
   (void)arguments;
 
   exit(EXIT_SUCCESS);
 }
 
-int execute(char** arguments) {
-  if (arguments == NULL || arguments[0] == NULL) {
-    return 1;
+int execute(ArgumentsVector* arguments) {
+  if (arguments->length <= 0) {
+    return -1;
   }
 
   int built_in_commands_size =
@@ -50,7 +50,7 @@ int execute(char** arguments) {
   for (int i = 0; i < built_in_commands_size; i++) {
     BuiltInCommand found_built_in_command = built_in_commands[i];
 
-    if (strcmp(found_built_in_command.name, arguments[0]) == 0) {
+    if (strcmp(found_built_in_command.name, arguments->data[0]) == 0) {
       int response = found_built_in_command.execute(arguments);
 
       return response;
@@ -66,10 +66,10 @@ int execute(char** arguments) {
   ProcessStatus child_process_status;
 
   if (child_process_id == 0) {
-    int child_process_response = execvp(arguments[0], arguments);
+    int child_process_response = execvp(arguments->data[0], arguments->data);
 
     if (child_process_response == -1) {
-      perror(arguments[0]);
+      perror(arguments->data[0]);
       exit(EXIT_FAILURE);
     }
 

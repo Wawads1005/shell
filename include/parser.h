@@ -9,8 +9,6 @@
 
 #define INITIAL_ARGUMENTS_CAPACITY 8
 
-DEFINE_VECTOR(char*, Arguments)
-
-ArgumentsVector* parse_arguments(char* line);
+ArgumentsVector* parse_arguments(StringVector* line);
 
 #endif
