@@ -1,38 +1,46 @@
 #include "parser.h"
 
-char** parse_arguments(char* line_data) {
-  int arguments_capacity = BUFSIZ;
-  int argument_length = 0;
-  char** arguments = malloc(sizeof(char*) * arguments_capacity);
+ArgumentsVector* parse_arguments(char* line_data) {
+  ArgumentsVector* arguments = malloc(sizeof(ArgumentsVector));
 
   if (arguments == NULL) {
+    exit(EXIT_FAILURE);
+  }
+
+  arguments->capacity = INITIAL_ARGUMENTS_CAPACITY;
+  arguments->length = 0;
+  arguments->data = malloc(sizeof(char*) * arguments->capacity);
+
+  if (arguments->data == NULL) {
+    free(arguments);
     exit(EXIT_FAILURE);
   }
 
   char* argument = strtok(line_data, " ");
 
   while (argument != NULL) {
-    if (argument_length >= arguments_capacity - 1) {
-      arguments_capacity += BUFSIZ;
+    if (arguments->length >= arguments->capacity - 1) {
+      arguments->capacity += INITIAL_ARGUMENTS_CAPACITY;
 
       char** resized_arguments =
-          realloc(arguments, sizeof(char*) * arguments_capacity);
+          realloc(arguments->data, sizeof(char*) * arguments->capacity);
 
       if (resized_arguments == NULL) {
+        free(arguments->data);
         free(arguments);
         exit(EXIT_FAILURE);
       }
 
-      arguments = resized_arguments;
+      arguments->data = resized_arguments;
     }
 
-    arguments[argument_length] = argument;
-    argument_length++;
+    arguments->data[arguments->length] = argument;
+    arguments->length++;
 
     argument = strtok(NULL, " ");
   }
 
-  arguments[argument_length] = NULL;
+  arguments->data[arguments->length] = NULL;
 
   return arguments;
 }

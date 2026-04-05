@@ -7,6 +7,10 @@
 
 #include "common.h"
 
-char** parse_arguments(char* line);
+#define INITIAL_ARGUMENTS_CAPACITY 8
+
+DEFINE_VECTOR(char*, Arguments)
+
+ArgumentsVector* parse_arguments(char* line);
 
 #endif

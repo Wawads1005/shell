@@ -28,9 +28,9 @@ int main(void) {
       break;
     }
 
-    char** arguments = parse_arguments(line->data);
+    ArgumentsVector* arguments = parse_arguments(line->data);
 
-    int response = execute(arguments);
+    int response = execute(arguments->data);
 
     free(line->data);
     free(line);
