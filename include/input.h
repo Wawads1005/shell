@@ -9,6 +9,6 @@
 
 #define NL 10
 
-String readline();
+Vector* readline();
 
 #endif

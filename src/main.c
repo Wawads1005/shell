@@ -21,14 +21,14 @@ int main(void) {
     printf("%s> ", current_working_directory);
     free(current_working_directory);
 
-    String line = readline();
+    Vector* line = readline();
 
     if (line == NULL) {
       printf("\n");
       break;
     }
 
-    String* arguments = parse_arguments(line);
+    String* arguments = parse_arguments(line->data);
 
     int response = execute(arguments);
 

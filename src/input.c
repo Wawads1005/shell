@@ -1,47 +1,57 @@
 #include "input.h"
 
-String readline() {
-  int line_size = BUFSIZ;
-  String line = malloc(sizeof(char) * line_size);
+Vector* readline() {
+  Vector* line = malloc(sizeof(Vector));
 
   if (line == NULL) {
     exit(EXIT_FAILURE);
   }
 
+  line->capacity = BUFSIZ;
+  line->data = malloc(line->capacity);
+  line->length = 0;
+
+  if (line->data == NULL) {
+    free(line);
+    exit(EXIT_FAILURE);
+  }
+
   int ascii_character;
-  int position = 0;
 
   while (true) {
     ascii_character = getchar();
 
     if (ascii_character == EOF) {
-      if (position == 0) {
+      if (line->length == 0) {
+        free(line->data);
         free(line);
         return NULL;
       }
 
-      line[position] = '\0';
+      line->data[line->length] = '\0';
       return line;
     }
 
     if (ascii_character == NL) {
-      line[position] = '\0';
+      line->data[line->length] = '\0';
       return line;
     }
 
-    line[position] = (char)ascii_character;
-    position++;
+    if (line->length >= line->capacity - 1) {
+      line->capacity += BUFSIZ;
 
-    if (position >= line_size - 1) {
-      line_size += BUFSIZ;
-      String resized_line = realloc(line, sizeof(char) * line_size);
+      String resized_line_data = realloc(line->data, line->capacity);
 
-      if (resized_line == NULL) {
+      if (resized_line_data == NULL) {
+        free(line->data);
         free(line);
         exit(EXIT_FAILURE);
       }
 
-      line = resized_line;
+      line->data = resized_line_data;
     }
+
+    line->data[line->length] = (char)ascii_character;
+    line->length++;
   }
 }
