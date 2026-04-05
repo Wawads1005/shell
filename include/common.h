@@ -7,7 +7,7 @@ typedef char Buffer[BUFSIZ];
 typedef struct {
   size_t capacity;
   size_t length;
-  String data
+  String data;
 } Vector;
 
 #endif
