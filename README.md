@@ -1,34 +1,55 @@
-# Shell
+Simple C Shell
 
-A small Unix-like shell written in C.
+A minimal Unix-like shell written in C for learning low-level system concepts such as process creation, argument parsing, and memory management.
 
-This project is a learning build focused on understanding how a shell actually works at the systems level: reading input, parsing commands, handling built-in commands, creating child processes, executing programs, and waiting for them to finish.
+Features
+Command execution using fork() and execvp()
+Built-in commands:
+cd
+exit
+Dynamic argument parsing (vector-based)
+Custom input reader (no fgets)
+Modular structure (input, parser, process, utils)
+Project Structure
+.
+├── include/
+│ ├── common.h
+│ ├── input.h
+│ ├── parser.h
+│ ├── process.h
+│ └── utils.h
+├── src/
+│ ├── input.c
+│ ├── parser.c
+│ ├── process.c
+│ ├── utils.c
+│ └── main.c
+├── TODO.md
+└── README.md
+Build
 
-## Current Features
+Compile all source files:
 
-- Interactive prompt
-- Reads user input with `fgets`
-- Parses arguments by spaces
-- Runs external commands with `fork()`, `execvp()`, and `waitpid()`
-- Built-in `cd`
-- Built-in `exit`
-- Shows the current working directory in the prompt
+gcc -Wall -Wextra -Werror src/_.c -Iinclude -o myshell
+Run
+./myshell
+How It Works
+Display prompt (current working directory)
+Read user input
+Parse input into arguments
+Execute:
+Built-in command (cd, exit)
+or external program via execvp
+Repeat
+Notes
+Argument parsing is space-based (no quotes or escaping yet)
+Arguments are stored as char_ and depend on the input buffer lifetime
+Designed for learning purposes, not production use
+TODO
 
-## Project Goal
+See TODO.md for planned features:
 
-The goal of this project is not to build a full Bash replacement.
-
-It is to learn the core ideas behind shells by implementing them step by step in plain C.
-
-## Tech
-
-- C
-- POSIX system calls
-- GCC or Clang
-- Linux / Unix-like environment
-
-## Build
-
-```bash
-gcc -Wall -Wextra -Werror -pedantic -std=c11 main.c -o myshell
-```
+Pipes (|)
+Output redirection (>, >>)
+Input redirection (<)
+Better parsing (quotes, escaping)

@@ -96,8 +96,8 @@ DONE WHEN:
 
 - [x] Check fork() result
 - [x] Check execvp() result
-- [ ] Check waitpid() result
-- [ ] Check chdir() result
+- [x] Check waitpid() result
+- [x] Check chdir() result
 - [x] Handle empty arguments[0]
 
 DONE WHEN:
