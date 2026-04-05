@@ -13,14 +13,14 @@
 typedef int ProcessID;
 typedef int ProcessStatus;
 typedef struct {
-  String name;
-  int (*execute)(String*);
+  char* name;
+  int (*execute)(char**);
 } BuiltInCommand;
 
 ProcessID create_child_process();
 
-int execute_change_directory(String* arguments);
-int execute_exit(String* arguments);
-int execute(String* argumemnts);
+int execute_change_directory(char** arguments);
+int execute_exit(char** arguments);
+int execute(char** argumemnts);
 
 #endif

@@ -1,23 +1,22 @@
 #include "parser.h"
 
-String* parse_arguments(String line) {
+char** parse_arguments(char* line_data) {
   int arguments_capacity = BUFSIZ;
-  String* arguments = malloc(sizeof(String) * arguments_capacity);
+  int argument_length = 0;
+  char** arguments = malloc(sizeof(char*) * arguments_capacity);
 
   if (arguments == NULL) {
     exit(EXIT_FAILURE);
   }
 
-  int position = 0;
-
-  String argument = strtok(line, " ");
+  char* argument = strtok(line_data, " ");
 
   while (argument != NULL) {
-    if (position >= arguments_capacity - 1) {
+    if (argument_length >= arguments_capacity - 1) {
       arguments_capacity += BUFSIZ;
 
-      String* resized_arguments =
-          realloc(arguments, sizeof(String) * arguments_capacity);
+      char** resized_arguments =
+          realloc(arguments, sizeof(char*) * arguments_capacity);
 
       if (resized_arguments == NULL) {
         free(arguments);
@@ -27,13 +26,13 @@ String* parse_arguments(String line) {
       arguments = resized_arguments;
     }
 
-    arguments[position] = argument;
-    position++;
+    arguments[argument_length] = argument;
+    argument_length++;
 
     argument = strtok(NULL, " ");
   }
 
-  arguments[position] = NULL;
+  arguments[argument_length] = NULL;
 
   return arguments;
 }

@@ -17,7 +17,7 @@ BuiltInCommand built_in_commands[2] = {
   { .name = "exit", .execute = execute_exit }
 };
 
-int execute_change_directory(String* arguments) {
+int execute_change_directory(char** arguments) {
   if (arguments[1] == NULL) {
     fprintf(stderr, "cd: missing arguments\n");
 
@@ -33,13 +33,13 @@ int execute_change_directory(String* arguments) {
   return 1;
 }
 
-int execute_exit(String* arguments) {
+int execute_exit(char** arguments) {
   (void)arguments;
 
   exit(EXIT_SUCCESS);
 }
 
-int execute(String* arguments) {
+int execute(char** arguments) {
   if (arguments == NULL || arguments[0] == NULL) {
     return 1;
   }

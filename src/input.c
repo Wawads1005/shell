@@ -1,7 +1,7 @@
 #include "input.h"
 
-Vector* readline() {
-  Vector* line = malloc(sizeof(Vector));
+StringVector* readline() {
+  StringVector* line = malloc(sizeof(StringVector));
 
   if (line == NULL) {
     exit(EXIT_FAILURE);
@@ -40,7 +40,7 @@ Vector* readline() {
     if (line->length >= line->capacity - 1) {
       line->capacity += BUFSIZ;
 
-      String resized_line_data = realloc(line->data, line->capacity);
+      char* resized_line_data = realloc(line->data, line->capacity);
 
       if (resized_line_data == NULL) {
         free(line->data);

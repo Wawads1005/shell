@@ -11,7 +11,7 @@
 
 int main(void) {
   while (true) {
-    String current_working_directory = get_current_working_directory();
+    char* current_working_directory = get_current_working_directory();
 
     if (current_working_directory == NULL) {
       fprintf(stderr, "failed to get current working directory\n");
@@ -21,17 +21,18 @@ int main(void) {
     printf("%s> ", current_working_directory);
     free(current_working_directory);
 
-    Vector* line = readline();
+    StringVector* line = readline();
 
     if (line == NULL) {
       printf("\n");
       break;
     }
 
-    String* arguments = parse_arguments(line->data);
+    char** arguments = parse_arguments(line->data);
 
     int response = execute(arguments);
 
+    free(line->data);
     free(line);
     free(arguments);
 

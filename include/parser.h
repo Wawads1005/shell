@@ -7,6 +7,6 @@
 
 #include "common.h"
 
-String* parse_arguments(String line);
+char** parse_arguments(char* line);
 
 #endif

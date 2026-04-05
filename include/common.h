@@ -1,13 +1,13 @@
 #ifndef COMMON_H
 #define COMMON_H
 
-typedef char* String;
-typedef char Buffer[BUFSIZ];
+#define DEFINE_VECTOR(Type, Name) \
+  typedef struct {                \
+    Type* data;                   \
+    size_t length;                \
+    size_t capacity;              \
+  } Name##Vector;
 
-typedef struct {
-  size_t capacity;
-  size_t length;
-  String data;
-} Vector;
+DEFINE_VECTOR(char, String)
 
 #endif

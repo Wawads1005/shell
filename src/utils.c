@@ -1,5 +1,5 @@
 #include "utils.h"
 
-String get_current_working_directory() {
-  String current_working_directory = getcwd(NULL, 0);
+char* get_current_working_directory() {
+  char* current_working_directory = getcwd(NULL, 0);
 }

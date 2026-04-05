@@ -7,6 +7,6 @@
 
 #include "common.h"
 
-String get_current_working_directory();
+char* get_current_working_directory();
 
 #endif
