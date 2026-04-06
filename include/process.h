@@ -22,5 +22,6 @@ ProcessID create_child_process();
 int execute_change_directory(ArgumentsVector* arguments);
 int execute_exit(ArgumentsVector* arguments);
 int execute(ArgumentsVector* arguments);
+int execute_pipe(char** left_arguments, char** right_arguments);
 
 #endif

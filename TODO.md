@@ -146,12 +146,12 @@ TEST:
 
 ## Phase 10 — Pipe |
 
-- [ ] Detect "|"
-- [ ] pipe()
-- [ ] fork left process
-- [ ] fork right process
-- [ ] connect via dup2()
-- [ ] close unused fds
+- [x] Detect "|"
+- [x] pipe()
+- [x] fork left process
+- [x] fork right process
+- [x] connect via dup2()
+- [x] close unused fds
 
 TEST:
 
