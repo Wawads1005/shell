@@ -68,7 +68,6 @@ gcc -Wall -Wextra -Werror src/*.c -Iinclude -o myshell
 
 See `TODO.md` for planned features:
 
-- Pipes (`|`)
 - Output redirection (`>`, `>>`)
 - Input redirection (`<`)
 - Better parsing (quotes, escaping)
